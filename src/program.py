@@ -147,10 +147,7 @@ e.pack()
 clear_b = Button(master, text="clear", width=10, command=callback_clear)
 #TODO: copy button
 clear_b.pack()
-copy_b.pack()
 e.bind("<space>", onKeyPress)#translate text everytime space is pressed
 e.focus_set()                #gets keyboard focus
 
 e.mainloop()
-
-
