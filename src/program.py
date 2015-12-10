@@ -64,6 +64,11 @@ def onKeyPress(event):#Deletes the current text and writes the new translated on
 	old = e.get()
 	e.delete(0, END)
 	e.insert(0,translate(old))
+	
+def callback_clear():#clear button
+	e.delete(0, END)
+
+		
 
 capital_letters = {
     u'A': u'А',
@@ -139,9 +144,13 @@ master = Tk()
 
 e = Entry(master)
 e.pack()
+clear_b = Button(master, text="clear", width=10, command=callback_clear)
+#TODO: copy button
+clear_b.pack()
+copy_b.pack()
 e.bind("<space>", onKeyPress)#translate text everytime space is pressed
 e.focus_set()                #gets keyboard focus
 
-mainloop()
+e.mainloop()
 
 
