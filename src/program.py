@@ -5,8 +5,10 @@ from Tkinter import *
 def translate(word):
     word = list(word)
     for index, char in enumerate(word):
-        if (index+1)<len(word):
-            if (char == 's') and (word[index+1]=='h'):
+        if (index+1)<len(word): #checks if it is the last char
+        			#might remove this for since I am using the same else condition 2 times
+        			#I could also add the same condition on all the ifs below, but that would also be kinda bad, and I'm too lazy to fix it now
+            if (char == 's') and (word[index+1]=='h'):#checking for russian letters that would use more than one latin letter
                 if((index+3)<len(word) and word[index+2]=='c' and word[index+3]=='h'):
                     word[index] = u"щ"
                     del word[index+1], word[index+1], word[index+1]
@@ -45,26 +47,23 @@ def translate(word):
             elif (char == 'z') and (word[index+1]=='h'):
                 word[index] = u"ж"
                 del word[index+1]
-            else:
+            else:#simple letters
                 if char in lower_case_letters.keys():
                     word[index] = lower_case_letters[char]
                 elif char in capital_letters.keys():
                     word[index] = capital_letters[char]
-        else:
+        else:#same thing for the last char
             if char in lower_case_letters.keys():
                 word[index] = lower_case_letters[char]
             elif char in capital_letters.keys():
                 word[index] = capital_letters[char]
-    return "".join(word)
+    return "".join(word)#joins the list of chars so we can have the word
 
 
-def onKeyPress(event):
+def onKeyPress(event):#Deletes the current text and writes the new translated one
 	old = e.get()
 	e.delete(0, END)
-	#e.insert(0, traducao(old))
 	e.insert(0,translate(old))
-
-
 
 capital_letters = {
     u'A': u'А',
@@ -133,7 +132,7 @@ lower_case_letters = {
     u'\'': u'ь',
     u'è': u'э',
     u'yu': u'ю',
-    u'ya': u'я'
+    u'ya': u'я' 
 }
     
 master = Tk()
@@ -144,7 +143,5 @@ e.bind("<space>", onKeyPress)#translate text everytime space is pressed
 e.focus_set()                #gets keyboard focus
 
 mainloop()
-
-
 
 
