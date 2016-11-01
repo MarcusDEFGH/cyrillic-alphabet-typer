@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Tkinter import *
+from tkinter import *
 
 def translate(word):
     word = list(word)
@@ -60,15 +60,16 @@ def translate(word):
     return "".join(word)#joins the list of chars so we can have the word
 
 
-def onKeyPress(event):#Deletes the current text and writes the new translated one
-	old = e.get()
-	e.delete(0, END)
-	e.insert(0,translate(old))
+def on_key_press(event):#Deletes the current text and writes the new translated one
+	old = text.get('1.0', END)
+	text.delete('1.0', END)
+	text.insert(INSERT,(str(translate(old).split('\n')[0])))
 	
 def callback_clear():#clear button
-	e.delete(0, END)
+	text.delete('1.0', END)
 
-		
+
+	
 
 capital_letters = {
     u'A': u'А',
@@ -140,14 +141,13 @@ lower_case_letters = {
     u'ya': u'я' 
 }
     
-master = Tk()
 
-e = Entry(master)
-e.pack()
-clear_b = Button(master, text="clear", width=10, command=callback_clear)
-#TODO: copy button
+root = Tk()
+text = Text(root)
+clear_b = Button(root, text="clear", width=10, command=callback_clear)
 clear_b.pack()
-e.bind("<space>", onKeyPress)#translate text everytime space is pressed
-e.focus_set()                #gets keyboard focus
 
-e.mainloop()
+text.pack()
+text.bind("<space>", on_key_press)#translate text everytime space is pressed
+
+root.mainloop()
